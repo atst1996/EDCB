@@ -40,10 +40,9 @@ void CServiceFilter::FilterPacket(vector<BYTE>& outData, const BYTE* data, const
 			if( 1 + pointer < packet.data_byteSize ){
 				if( packet.data_byte[1 + pointer] == 2 ){
 					//PMT
-					vector<pair<WORD, CPMTUtil>>::iterator itr =
-						lower_bound_first(this->pmtUtilMap.begin(), this->pmtUtilMap.end(), packet.PID);
-					if( itr == this->pmtUtilMap.end() || itr->first != packet.PID ){
-						itr = this->pmtUtilMap.insert(itr, std::make_pair(packet.PID, CPMTUtil()));
+					map<WORD, CPMTUtil>::iterator itr = this->pmtUtilMap.find(packet.PID);
+					if( itr == this->pmtUtilMap.end() ){
+						itr = this->pmtUtilMap.insert(std::make_pair(packet.PID, CPMTUtil())).first;
 					}
 					if( itr->second.AddPacket(packet) ){
 						this->catOrPmtUpdated = true;
@@ -53,9 +52,8 @@ void CServiceFilter::FilterPacket(vector<BYTE>& outData, const BYTE* data, const
 			}
 		}else{
 			//PMTの2パケット目かチェック
-			vector<pair<WORD, CPMTUtil>>::iterator itr =
-				lower_bound_first(this->pmtUtilMap.begin(), this->pmtUtilMap.end(), packet.PID);
-			if( itr != this->pmtUtilMap.end() && itr->first == packet.PID && itr->second.AddPacket(packet) ){
+			map<WORD, CPMTUtil>::iterator itr = this->pmtUtilMap.find(packet.PID);
+			if( itr != this->pmtUtilMap.end() && itr->second.AddPacket(packet) ){
 				this->catOrPmtUpdated = true;
 				CheckNeedPID();
 			}

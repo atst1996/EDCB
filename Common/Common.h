@@ -27,26 +27,6 @@ using std::map;
 using std::multimap;
 using std::vector;
 
-template<class RndIt, class T>
-RndIt lower_bound_first(RndIt first, RndIt last, const T& key)
-{
-	while( last != first ){
-		RndIt it = first + (last - first) / 2;
-		if( it->first < key ) first = ++it; else last = it;
-	}
-	return first;
-}
-
-template<class RndIt, class T>
-RndIt upper_bound_first(RndIt first, RndIt last, const T& key)
-{
-	while( last != first ){
-		RndIt it = first + (last - first) / 2;
-		if( !(key < it->first) ) first = ++it; else last = it;
-	}
-	return first;
-}
-
 #ifdef __cpp_lib_nonmember_container_access
 #define array_size std::size
 #else

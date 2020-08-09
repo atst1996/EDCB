@@ -27,16 +27,17 @@ void CDropCount::AddData(const BYTE* data, DWORD size)
 		BYTE sync_byte = data[i];
 		BYTE transport_error_indicator = data[i + 1] & 0x80;
 		if( sync_byte == 0x47 && transport_error_indicator == 0 ){
-			item.first = (data[i + 1] << 8 | data[i + 2]) & 0x1FFF;
-			vector<DROP_INFO>::iterator itr =
-				lower_bound_first(this->infoList.begin(), this->infoList.end(), item.first);
-			if( itr == this->infoList.end() || itr->first != item.first ){
+			item.PID = (data[i + 1] << 8 | data[i + 2]) & 0x1FFF;
+			vector<DROP_INFO>::iterator itr;
+			itr = std::lower_bound(this->infoList.begin(), this->infoList.end(), item,
+			                       [](const DROP_INFO& a, const DROP_INFO& b) { return a.PID < b.PID; });
+			if( itr == this->infoList.end() || itr->PID != item.PID ){
 				BYTE continuity_counter = data[i + 3] & 0x0F;
 				item.lastCounter = (continuity_counter + 15) & 0x0F;
 				itr = this->infoList.insert(itr, item);
 			}
 			itr->total++;
-			if( itr->first != 0x1FFF ){
+			if( itr->PID != 0x1FFF ){
 				CheckCounter(data + i, &(*itr));
 			}
 		}
@@ -169,7 +170,7 @@ void CDropCount::SaveLog(const wstring& filePath, BOOL asUtf8)
 		string strA;
 		for( vector<DROP_INFO>::const_iterator itr = this->infoList.begin(); itr != this->infoList.end(); itr++ ){
 			LPCSTR desc = "";
-			switch( itr->first ){
+			switch( itr->PID ){
 			case 0x0000:
 				desc = "PAT";
 				break;
@@ -229,15 +230,15 @@ void CDropCount::SaveLog(const wstring& filePath, BOOL asUtf8)
 				break;
 			default:
 				vector<pair<WORD, wstring>>::const_iterator itrPID =
-					lower_bound_first(this->pidName.begin(), this->pidName.end(), itr->first);
-				if( itrPID != this->pidName.end() && itrPID->first == itr->first ){
+					std::lower_bound(this->pidName.begin(), this->pidName.end(), std::make_pair(itr->PID, wstring()));
+				if( itrPID != this->pidName.end() && itrPID->first == itr->PID ){
 					WtoA(itrPID->second, strA, asUtf8 ? UTIL_CONV_UTF8 : UTIL_CONV_DEFAULT);
 					desc = strA.c_str();
 				}
 				break;
 			}
 			fprintf_s(fp.get(), "PID: 0x%04X  Total:%9lld  Drop:%9lld  Scramble: %9lld  %s\r\n",
-			          itr->first, itr->total, itr->drop, itr->scramble, desc);
+			          itr->PID, itr->total, itr->drop, itr->scramble, desc);
 		}
 
 		WtoA(L"使用BonDriver : " + bonFile, strA, asUtf8 ? UTIL_CONV_UTF8 : UTIL_CONV_DEFAULT);
@@ -248,7 +249,7 @@ void CDropCount::SaveLog(const wstring& filePath, BOOL asUtf8)
 void CDropCount::SetPIDName(WORD pid, const wstring& name)
 {
 	vector<pair<WORD, wstring>>::iterator itr =
-		lower_bound_first(this->pidName.begin(), this->pidName.end(), pid);
+		std::lower_bound(this->pidName.begin(), this->pidName.end(), std::make_pair(pid, wstring()));
 	if( itr == this->pidName.end() || itr->first != pid ){
 		itr = this->pidName.insert(itr, std::make_pair(pid, wstring()));
 	}

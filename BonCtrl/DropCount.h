@@ -20,7 +20,7 @@ public:
 	void SetPIDName(WORD pid, const wstring& name);
 protected:
 	struct DROP_INFO {
-		WORD first; //PID
+		WORD PID;
 		BYTE lastCounter;
 		BOOL duplicateFlag;
 		ULONGLONG total;
