@@ -4,8 +4,15 @@
 #include "../Common/EpgTimerUtil.h"
 
 
-BOOL CCATUtil::AddPacket(const CTSPacketUtil& packet)
+CCATUtil::CCATUtil(void)
 {
+}
+
+BOOL CCATUtil::AddPacket(CTSPacketUtil* packet)
+{
+	if( packet == NULL ){
+		return FALSE;
+	}
 	if( buffUtil.Add188TS(packet) == TRUE ){
 		BYTE* section = NULL;
 		DWORD sectionSize = 0;

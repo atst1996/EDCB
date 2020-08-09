@@ -30,7 +30,7 @@ public:
 	//引数：
 	// packet			//[IN] PMTのパケット
 	DWORD AddData(
-		const CTSPacketUtil& packet
+		CTSPacketUtil* packet
 	);
 
 	//必要なPIDかを確認

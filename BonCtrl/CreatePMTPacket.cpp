@@ -37,13 +37,16 @@ void CCreatePMTPacket::SetCreateMode(
 //引数：
 // packet			//[IN] PMTのパケット
 DWORD CCreatePMTPacket::AddData(
-	const CTSPacketUtil& packet
+	CTSPacketUtil* packet
 )
 {
+	if( packet == NULL ){
+		return ERR_FALSE;
+	}
 	DWORD ret = ERR_NEED_NEXT_PACKET;
 	ret = buffUtil.Add188TS(packet);
 	if( ret == TRUE ){
-		this->lastPmtPID = packet.PID;
+		this->lastPmtPID = packet->PID;
 
 		BYTE* section = NULL;
 		DWORD sectionSize = 0;

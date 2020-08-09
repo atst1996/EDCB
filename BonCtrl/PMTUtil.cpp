@@ -10,8 +10,11 @@ CPMTUtil::CPMTUtil(void)
 	this->PCR_PID = 0xFFFF;
 }
 
-BOOL CPMTUtil::AddPacket(const CTSPacketUtil& packet)
+BOOL CPMTUtil::AddPacket(CTSPacketUtil* packet)
 {
+	if( packet == NULL ){
+		return FALSE;
+	}
 	if( buffUtil.Add188TS(packet) == TRUE ){
 		BYTE* section = NULL;
 		DWORD sectionSize = 0;
