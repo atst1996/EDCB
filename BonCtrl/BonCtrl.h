@@ -55,7 +55,6 @@ public:
 	// bonDriverFile	[IN]BonDriverのファイル名
 	BOOL OpenBonDriver(
 		LPCWSTR bonDriverFile,
-		int traceLevel,
 		int openWait,
 		DWORD tsBuffMaxCount
 		);
