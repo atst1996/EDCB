@@ -48,7 +48,7 @@ namespace EpgTimer
                         nwMode += 2;
                         nwBonDriver = Settings.Instance.NwTvModePipe ? "BonDriver_NetworkPipe.dll" : "BonDriver_TCP.dll";
                     }
-                    
+
                     if (CommonManager.CreateSrvCtrl().SendNwTVMode(nwMode) == ErrCode.CMD_SUCCESS)
                     {
                         if (CommonManager.CreateSrvCtrl().SendNwTVSetCh(chInfo) == ErrCode.CMD_SUCCESS)
@@ -242,8 +242,7 @@ namespace EpgTimer
                         {
                             try
                             {
-                                using (System.Threading.EventWaitHandle.OpenExisting(
-                                           "Global\\View_Ctrl_BonConnect_" + process.Id, System.Security.AccessControl.EventWaitHandleRights.Synchronize))
+                                using (System.Threading.EventWaitHandle.OpenExisting($"Global\\View_Ctrl_BonConnect_{process.Id}"))
                                 {
                                 }
                                 // Viewアプリ(EdcbPlugIn)と判断
@@ -254,8 +253,7 @@ namespace EpgTimer
                             {
                                 try
                                 {
-                                    using (System.Threading.EventWaitHandle.OpenExisting(
-                                               "Global\\TvTest_Ctrl_BonConnect_" + process.Id, System.Security.AccessControl.EventWaitHandleRights.Synchronize))
+                                    using (System.Threading.EventWaitHandle.OpenExisting($"Global\\TvTest_Ctrl_BonConnect_{process.Id}"))
                                     {
                                     }
                                     break;
@@ -282,8 +280,7 @@ namespace EpgTimer
                 // 原作と異なりプロセス名ではなく接続待機用イベントの有無で判断するので注意
                 try
                 {
-                    using (System.Threading.EventWaitHandle.OpenExisting(
-                               "Global\\" + type + "_Ctrl_BonConnect_" + p.Id, System.Security.AccessControl.EventWaitHandleRights.Synchronize))
+                    using (System.Threading.EventWaitHandle.OpenExisting($"Global\\{type}_Ctrl_BonConnect_{p.Id}"))
                     {
                     }
                     if (type == "View")

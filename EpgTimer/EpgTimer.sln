@@ -1,7 +1,9 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 11.00
-# Visual Studio 2010
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EpgTimer", "EpgTimer\EpgTimer.csproj", "{6B82030F-99FB-4D11-81E2-BAFD81A672BC}"
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30711.63
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EpgTimer", "EpgTimer\EpgTimer.csproj", "{6B82030F-99FB-4D11-81E2-BAFD81A672BC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,8 +13,8 @@ Global
 		Release|x86 = Release|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{6B82030F-99FB-4D11-81E2-BAFD81A672BC}.Debug|x64.ActiveCfg = Debug|x64
-		{6B82030F-99FB-4D11-81E2-BAFD81A672BC}.Debug|x64.Build.0 = Debug|x64
+		{6B82030F-99FB-4D11-81E2-BAFD81A672BC}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{6B82030F-99FB-4D11-81E2-BAFD81A672BC}.Debug|x64.Build.0 = Debug|Any CPU
 		{6B82030F-99FB-4D11-81E2-BAFD81A672BC}.Debug|x86.ActiveCfg = Debug|x86
 		{6B82030F-99FB-4D11-81E2-BAFD81A672BC}.Debug|x86.Build.0 = Debug|x86
 		{6B82030F-99FB-4D11-81E2-BAFD81A672BC}.Release|x64.ActiveCfg = Release|x64
@@ -22,5 +24,8 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {6461181E-87D3-43B3-9213-1FD7E1DEAD6B}
 	EndGlobalSection
 EndGlobal

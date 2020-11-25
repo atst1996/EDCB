@@ -1,0 +1,7 @@
+*.suo
+bin/
+obj/
+.vs/
+/packages
+/x64
+/x86

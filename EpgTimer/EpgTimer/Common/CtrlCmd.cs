@@ -620,8 +620,7 @@ namespace EpgTimer
                 // 接続待ち
                 try
                 {
-                    using (var waitEvent = System.Threading.EventWaitHandle.OpenExisting(eventName,
-                               System.Security.AccessControl.EventWaitHandleRights.Synchronize))
+                    using (var waitEvent = System.Threading.EventWaitHandle.OpenExisting(eventName))
                     {
                         if (waitEvent.WaitOne(connectTimeOut) == false)
                         {
