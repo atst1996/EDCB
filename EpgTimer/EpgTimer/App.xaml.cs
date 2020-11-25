@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Configuration;
 using System.Linq;
+using System.Text;
 using System.Windows;
 
 namespace EpgTimer
@@ -11,5 +12,10 @@ namespace EpgTimer
     /// </summary>
     public partial class App : Application
     {
+        static App()
+        {
+            // Shift_JIS等のコードページの登録
+            Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
+        }
     }
 }

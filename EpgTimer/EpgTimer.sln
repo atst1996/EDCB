@@ -7,16 +7,22 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EpgTimer", "EpgTimer\EpgTim
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
 		Debug|x64 = Debug|x64
 		Debug|x86 = Debug|x86
+		Release|Any CPU = Release|Any CPU
 		Release|x64 = Release|x64
 		Release|x86 = Release|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{6B82030F-99FB-4D11-81E2-BAFD81A672BC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6B82030F-99FB-4D11-81E2-BAFD81A672BC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6B82030F-99FB-4D11-81E2-BAFD81A672BC}.Debug|x64.ActiveCfg = Debug|Any CPU
 		{6B82030F-99FB-4D11-81E2-BAFD81A672BC}.Debug|x64.Build.0 = Debug|Any CPU
-		{6B82030F-99FB-4D11-81E2-BAFD81A672BC}.Debug|x86.ActiveCfg = Debug|x86
-		{6B82030F-99FB-4D11-81E2-BAFD81A672BC}.Debug|x86.Build.0 = Debug|x86
+		{6B82030F-99FB-4D11-81E2-BAFD81A672BC}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{6B82030F-99FB-4D11-81E2-BAFD81A672BC}.Debug|x86.Build.0 = Debug|Any CPU
+		{6B82030F-99FB-4D11-81E2-BAFD81A672BC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6B82030F-99FB-4D11-81E2-BAFD81A672BC}.Release|Any CPU.Build.0 = Release|Any CPU
 		{6B82030F-99FB-4D11-81E2-BAFD81A672BC}.Release|x64.ActiveCfg = Release|x64
 		{6B82030F-99FB-4D11-81E2-BAFD81A672BC}.Release|x64.Build.0 = Release|x64
 		{6B82030F-99FB-4D11-81E2-BAFD81A672BC}.Release|x86.ActiveCfg = Release|x86
