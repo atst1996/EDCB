@@ -204,9 +204,13 @@ namespace EpgTimer.EpgView
         private static GlyphRun CreateGlyphRun(double x, double y, Matrix m, double selfLeft,
                                                GlyphTypeface glyphType, double fontSize, List<ushort> indexes, List<double> widths)
         {
+            // TODO: 適正値を調べる
+            const float pixelPerDip = 1.0f;
+
             //originを物理ピクセルに合わせる。selfLeftはレンダリング時に加算されるので混ぜてはいけない
-            Point origin = new Point(Math.Ceiling(x * m.M11) / m.M11 - selfLeft, Math.Ceiling(y * m.M22) / m.M22);
-            return new GlyphRun(glyphType, 0, false, fontSize, indexes, origin, widths, null, null, null, null, null, null);
+            var origin = new Point(Math.Ceiling(x * m.M11) / m.M11 - selfLeft, Math.Ceiling(y * m.M22) / m.M22);
+
+            return new GlyphRun(glyphType, 0, false, fontSize, pixelPerDip, indexes, origin, widths, null, null, null, null, null, null);
         }
 
         public static bool RenderText(string text, List<Tuple<Brush, GlyphRun>> textDrawList, ItemFont itemFont, double fontSize,
@@ -215,7 +219,7 @@ namespace EpgTimer.EpgView
         {
             totalHeight = 0;
 
-            for (int i = 0; i < text.Length; )
+            for (int i = 0; i < text.Length;)
             {
                 if (totalHeight > maxHeight)
                 {
